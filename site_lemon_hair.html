@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lemon Hair</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+    body{background:#f5f5f5;color:#222}
+
+    header{
+      background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.75)),url('você.jpg') center/cover no-repeat;
+      height:90vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      color:#fff
+    }
+
+    header h1{font-size:3.5rem;color:#9aff3d}
+    header p{font-size:1.2rem;margin-top:10px}
+
+    .btn{
+      display:inline-block;
+      margin-top:25px;
+      padding:14px 32px;
+      background:#9aff3d;
+      color:#000;
+      border-radius:30px;
+      text-decoration:none;
+      font-weight:600;
+      transition:.3s
+    }
+    .btn:hover{transform:scale(1.05)}
+
+    section{padding:80px 10%}
+
+    .about{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:50px;
+      align-items:center
+    }
+
+    /* ===== CARROSSEL ===== */
+    .carousel{
+      position:relative;
+      width:100%;
+      height:800px; /* ALTURA FIXA (evita imagem achatada) */
+      overflow:hidden;
+      border-radius:20px
+    }
+
+    .carousel img,
+    .carousel video{
+      width:100%;
+      height:100%;
+      object-fit:cover; /* mantém proporção */
+      position:absolute;
+      top:0;
+      left:0;
+      opacity:0;
+      transition:opacity .8s ease
+    }
+
+    .carousel img.active,
+    .carousel video.active{opacity:1}
+
+    .carousel-btn{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      background:rgba(0,0,0,.5);
+      color:#fff;
+      border:none;
+      font-size:2rem;
+      padding:10px 16px;
+      border-radius:50%;
+      cursor:pointer;
+      z-index:5
+    }
+
+    .carousel-btn.left{left:15px}
+    .carousel-btn.right{right:15px}
+    .carousel-btn:hover{background:rgba(0,0,0,.75)}
+
+    .services{background:#9aff3d}
+    .services h2{text-align:center;margin-bottom:40px}
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:30px
+    }
+
+    .card{
+      background:#fff;
+      padding:30px;
+      border-radius:20px;
+      text-align:center;
+      box-shadow:0 10px 30px rgba(0,0,0,.1)
+    }
+
+    footer{background:#111;color:#fff;text-align:center;padding:40px}
+
+    /* ===== RESPONSIVO ===== */
+    @media(max-width:900px){
+      .about{grid-template-columns:1fr}
+      header h1{font-size:2.5rem}
+    }
+
+    @media(max-width:768px){
+      .carousel{height:300px}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>lemon hair</h1>
+    <p>Cachos, crespos e cortes fora do padrão</p>
+    <a href="https://wa.me/5522981467008" target="_blank" class="btn">Agendar pelo WhatsApp</a>
+  </div>
+</header>
+
+<section class="about">
+  <div>
+    <h2>Sobre</h2>
+    <p>
+      Especialista em cabelos naturais, o Lemon Hair é um espaço pensado para quem cansou do óbvio.
+      Aqui cada corte é único, respeitando identidade, textura e atitude.
+    </p>
+  </div>
+
+  <div class="carousel">
+    <button class="carousel-btn left" onclick="prevSlide()">‹</button>
+    <button class="carousel-btn right" onclick="nextSlide()">›</button>
+
+    <img src="foto dos clientes.jpg" class="active" />
+    <img src="foto2.jpg" />
+    <video src="videi1.mp4" muted loop></video>
+    <video src="video2.mp4" muted loop></video>
+  </div>
+</section>
+
+<section class="services">
+  <h2>Serviços</h2>
+  <div class="cards">
+    <div class="card"><h3>Corte Curly</h3><p>Corte personalizado para cachos e crespos</p></div>
+    <div class="card"><h3>Coloração Criativa</h3><p>Cores vivas e técnicas modernas</p></div>
+    <div class="card"><h3>Tratamentos</h3><p>Hidratação, nutrição e reconstrução</p></div>
+  </div>
+</section>
+
+<footer>
+  <p>© Lemon Hair • Todos os direitos reservados</p>
+</footer>
+
+<a href="https://wa.me/5522981467008" target="_blank"
+   style="position:fixed;bottom:20px;right:20px;background:#25d366;color:#fff;
+          padding:15px 22px;border-radius:50px;font-weight:600;text-decoration:none;
+          box-shadow:0 10px 20px rgba(0,0,0,.25);z-index:999">
+  WhatsApp
+</a>
+
+<script>
+  let index = 0;
+  const slides = document.querySelectorAll('.carousel img, .carousel video');
+
+  function showSlide(i){
+    slides.forEach(s => {
+      s.classList.remove('active');
+      if(s.tagName === 'VIDEO') s.pause();
+    });
+    slides[i].classList.add('active');
+    if(slides[i].tagName === 'VIDEO') slides[i].play();
+  }
+
+  function nextSlide(){
+    index = (index + 1) % slides.length;
+    showSlide(index);
+  }
+
+  function prevSlide(){
+    index = (index - 1 + slides.length) % slides.length;
+    showSlide(index);
+  }
+
+</script>
+
+</body>
+</html>
