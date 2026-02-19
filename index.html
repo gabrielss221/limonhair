@@ -163,12 +163,15 @@
 
 .calendar-box {
   width: 100%;
-  max-width: 400px;        /* REMOVE o limite */
+  max-width: 400px;
   background: #fff;
   border-radius: 20px;
   padding: 20px;
   box-shadow: 0 10px 30px rgba(0,0,0,.1);
+
+  margin: 0 auto;   /* 🔥 garante centralização */
 }
+
 
 .calendar-header {
   display: flex;
@@ -245,6 +248,150 @@
   border: 0;
 }
 
+.localizacao {
+  padding: 80px 10%;
+}
+
+.map-central {
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,.1);
+}
+
+.map-central iframe {
+  width: 100%;
+  height: 400px;
+  border: 0;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+  z-index: 1000;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 40px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 600px;
+  z-index: 1001;
+  box-shadow: 0 20px 40px rgba(0,0,0,.2);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* 🔥 centraliza horizontalmente */
+}
+
+
+.hidden {
+  display: none;
+}
+
+.profissionais {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.card-profissional {
+  cursor: pointer;
+  transition: .3s;
+
+  display: flex;              
+  flex-direction: column;     
+  align-items: center;        
+  text-align: center;         
+}
+
+.card-profissional p {
+  margin-top: 10px;
+  text-align: center;
+  width: 100%;
+}
+
+.card-profissional:hover {
+  transform: scale(1.05);
+}
+
+.foto {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: #ddd; /* você coloca a imagem aqui depois */
+  margin: 0 auto 15px;
+}
+
+.lista-servicos {
+  display: grid;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.servico-item {
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.servico-item:hover {
+  background: #9aff3d;
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7,1fr);
+  gap: 5px;
+  margin-top: 15px;
+}
+
+.calendar-days span {
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.calendar-days span:hover {
+  background: #9aff3d;
+}
+
+.horarios-grid {
+  margin-top: 25px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(90px,1fr));
+  gap: 10px;
+
+  width: 100%;
+  max-width: 420px;  /* controla largura */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.hora {
+  padding: 10px;
+  border: 1px solid #000;
+  background: transparent;
+  cursor: pointer;
+}
+
+.hora:hover {
+  background: #9aff3d;
+}
+
+
+
 /* RESPONSIVO */
 @media (max-width: 900px) {
   .agendamento-container {
@@ -301,55 +448,83 @@
   </div>
 </section>
 
-<section class="agendamento" id="agendamento">
-  <h2>Escolha um dia e role para agendar seu horário</h2>
+<section class="localizacao">
+  <h2 style="text-align:center;margin-bottom:30px;">Nossa Localização</h2>
 
-  <div class="agendamento-container">
-
-    <!-- CALENDÁRIO -->
-    <div class="calendar-box">
-      <div class="calendar-header">
-        <button id="prevMonth">‹</button>
-        <span id="monthYear"></span>
-        <button id="nextMonth">›</button>
-      </div>
-
-      <div class="calendar-weekdays">
-        <span>Dom</span><span>Seg</span><span>Ter</span>
-        <span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span>
-      </div>
-
-      <div class="calendar-days" id="calendarDays"></div>
-    </div>
-
-    <!-- MAPA -->
-    <div class="map-box">
-      <iframe
-        src="https://www.google.com/maps?q=-22.889782,-43.291231&output=embed"
-        allowfullscreen
-        loading="lazy">
-      </iframe>
-    </div>
-
+  <div class="map-central">
+    <iframe
+      src="https://www.google.com/maps?q=-22.889782,-43.291231&output=embed"
+      allowfullscreen
+      loading="lazy">
+    </iframe>
   </div>
 
-  <!-- HORÁRIOS -->
-  <div class="horarios hidden" id="horarios">
-    <p>Horários disponíveis</p>
-    <div class="horarios-grid">
-      <button class="hora">09:00</button>
-      <button class="hora">10:00</button>
-      <button class="hora">11:00</button>
-      <button class="hora">13:00</button>
-      <button class="hora">14:00</button>
-      <button class="hora">15:00</button>
-      <button class="hora">16:00</button>
-      <button class="hora">17:00</button>
-    </div>
+  <div style="text-align:center;margin-top:40px;">
+    <button id="btnAbrirAgendamento" class="btn">Agendar Horário</button>
   </div>
-
-  <button id="agendar" disabled>Agendar pelo WhatsApp</button>
 </section>
+
+<!-- OVERLAY -->
+<div id="overlay" class="overlay hidden"></div>
+
+<!-- MODAL PROFISSIONAL -->
+<div id="modalProfissional" class="modal hidden">
+  <h2>Escolha o profissional</h2>
+
+  <div class="profissionais">
+    <div class="card-profissional" data-prof="João">
+      <div class="foto"></div>
+      <p>João</p>
+    </div>
+
+    <div class="card-profissional" data-prof="Maria">
+      <div class="foto"></div>
+      <p>Maria</p>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL SERVIÇOS -->
+<div id="modalServico" class="modal hidden">
+  <h2>Escolha o serviço</h2>
+
+  <div class="lista-servicos"></div>
+</div>
+
+<!-- MODAL CALENDÁRIO -->
+<div id="modalCalendario" class="modal hidden">
+  <h2>Escolha data e horário</h2>
+
+  <div class="calendar-box">
+    <div class="calendar-header">
+      <button id="prevMonth">‹</button>
+      <span id="monthYear"></span>
+      <button id="nextMonth">›</button>
+    </div>
+
+    <div class="calendar-weekdays">
+      <span>Dom</span><span>Seg</span><span>Ter</span>
+      <span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span>
+    </div>
+
+    <div class="calendar-days" id="calendarDays"></div>
+  </div>
+
+  <div class="horarios-grid" id="horariosGrid"></div>
+</div>
+
+<!-- MODAL CONFIRMAÇÃO -->
+<div id="modalConfirmacao" class="modal hidden">
+  <h2>Confirmar Agendamento</h2>
+
+  <div class="resumo"></div>
+
+  <input type="text" id="clienteNome" placeholder="Nome completo">
+  <input type="tel" id="clienteTelefone" placeholder="Telefone">
+
+  <button id="confirmarAgendamento" class="btn">Confirmar</button>
+</div>
+
 
 
 <!-- Firebase -->
@@ -393,13 +568,6 @@
   <p>© Lemon Hair • Todos os direitos reservados</p>
 </footer>
 
-<a href="https://wa.me/5522981467008" target="_blank"
-   style="position:fixed;bottom:20px;right:20px;background:#25d366;color:#fff;
-          padding:15px 22px;border-radius:50px;font-weight:600;text-decoration:none;
-          box-shadow:0 10px 20px rgba(0,0,0,.25);z-index:999">
-  WhatsApp
-</a>
-
 <script>
   let index = 0;
   const slides = document.querySelectorAll('.carousel img, .carousel video');
@@ -422,6 +590,8 @@
     index = (index - 1 + slides.length) % slides.length;
     showSlide(index);
   }
+
+
 
 </script>
 
