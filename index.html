@@ -279,16 +279,18 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background: #fff;
-  padding: 40px;
+  padding: 25px;
   border-radius: 20px;
-  width: 90%;
-  max-width: 600px;
+  width: 92%;
+  max-width: 520px;
+  max-height: 90vh;   /* 🔥 impede de estourar tela */
+  overflow-y: auto;   /* 🔥 adiciona scroll interno */
   z-index: 1001;
   box-shadow: 0 20px 40px rgba(0,0,0,.2);
 
   display: flex;
   flex-direction: column;
-  align-items: center;   /* 🔥 centraliza horizontalmente */
+  align-items: center;
 }
 
 
@@ -357,9 +359,23 @@
 }
 
 .calendar-days span {
-  padding: 10px;
-  border-radius: 50%;
-  cursor: pointer;
+  padding: 8px;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 480px) {
+  .calendar-box {
+    padding: 15px;
+  }
+
+  .calendar-days span {
+    padding: 6px;
+    font-size: 0.8rem;
+  }
+
+  .calendar-weekdays span {
+    font-size: 0.7rem;
+  }
 }
 
 .calendar-days span:hover {
