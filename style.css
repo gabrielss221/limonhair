@@ -1,29 +1,612 @@
-.admin-container {
-  max-width: 900px;
-  margin: 50px auto;
-  padding: 20px;
-  background: #111;
-  color: white;
-  border-radius: 10px;
+/* ================= FONTES PERSONALIZADAS ================= */
+
+@font-face {
+  font-family: 'Sprite Graffiti Shadow';
+  src: url('sprite-graffiti-shadow.otf') format('opentype');
 }
 
-.admin-card {
-  background: #1c1c1c;
-  padding: 15px;
-  margin-bottom: 15px;
-  border-radius: 8px;
+@font-face {
+  font-family: 'Sprite Graffiti';
+  src: url('sprite-graffiti.otf') format('opentype');
 }
 
-.admin-card button {
-  background: red;
-  border: none;
-  padding: 8px 12px;
-  color: white;
-  cursor: pointer;
-  border-radius: 5px;
+@font-face {
+  font-family: 'Arcade Game';
+  src: url('arcade-normal.otf') format('opentype');
 }
 
-.resumo-admin {
-  margin-bottom: 20px;
-  font-size: 18px;
+
+/* ================= RESET ================= */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  background:#000;
+  color:#fff;
+  font-family:'Arcade Game', sans-serif;
+  overflow-x:hidden;
+}
+
+/* ================= HERO ================= */
+.banner-unico{
+  width:100%;
+  height:85vh;
+  background:url(banner.jpg) center/cover no-repeat;
+  position:relative;
+}
+
+.banner-unico{
+  width:100%;
+  height:85vh;
+  background:url(banner.jpg) center/cover no-repeat;
+}
+
+/* ================= TÍTULOS ESTILIZADOS ================= */
+
+.caixa-estilizada,
+.caixa-estilizada2{
+  background:#fff;
+  border:5px solid #14f014;
+  padding:12px 50px;
+  display:inline-block;
+  position:relative;
+  z-index:10;
+  box-shadow:8px 8px 0px #000; /* sombra estilo poster */
+}
+
+.caixa-estilizada{
+  margin:80px auto -40px auto;
+  display:block;
+  width:fit-content;
+}
+
+.caixa-estilizada2{
+  position:relative;
+  left:50%;
+  transform:translateX(-50%);
+  margin-bottom:-40px;
+}
+
+.caixa-estilizada h2,
+.caixa-estilizada2 h2{
+  font-family:'Sprite Graffiti Shadow';
+  font-size:2.4rem;
+  letter-spacing:3px;
+  color:#000;
+  text-transform:uppercase;
+}
+
+.caixa-estilizada,
+.caixa-estilizada2{
+  transform:rotate(-1deg);
+}
+
+/* ================= CARROSSEL ================= */
+.carousel-container{
+  background:#000;
+  padding:80px 0;
+  position:relative;
+}
+
+.carousel-window{
+  width:85%;
+  margin:auto;
+  overflow:hidden;
+}
+
+.carousel-track{
+  display:flex;
+  gap:25px;
+  transition:transform .5s ease;
+}
+
+.carousel-track img{
+  width:320px;
+  height:520px;
+  object-fit:cover;
+  border-radius:12px;
+  transition:0.4s;
+}
+
+.carousel-track img:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 25px #14f014;
+}
+
+.arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:none;
+  border:none;
+  color:#14f014;
+  font-size:3rem;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.arrow:hover{
+  transform:translateY(-50%) scale(1.2);
+}
+
+.left-arrow{ left:5%; }
+.right-arrow{ right:5%; }
+
+/* ================= SOBRE ================= */
+.secao-contato{
+  background:#66ef92;
+  padding:100px 8%;
+  display:flex;
+  gap:80px;
+  align-items:flex-start;
+}
+
+.coluna-esquerda{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:30px;
+}
+
+.foto-perfil{
+  width:420px;
+  border-radius:20px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.4);
+}
+
+.btn-agendar{
+  background:#000;
+  color:#14f014;
+  padding:18px 50px;
+  font-family:'Sprite Graffiti Shadow';
+  font-size:1.4rem;
+  text-decoration:none;
+  transition:0.3s;
+  border:3px solid #000;
+}
+
+.btn-agendar:hover{
+  background:#14f014;
+  color:#000;
+}
+
+/* TEXTO */
+.coluna-direita{
+  flex:1;
+  max-width:600px;
+  display:flex;
+  flex-direction:column;
+  gap:30px;
+}
+
+.caixa-texto-preta{
+  background:#000;
+  padding:40px;
+  font-family:'Arcade Game';
+  font-size:1rem;
+  line-height:1.8;
+  border-left:6px solid #14f014;
+}
+
+/* MAPA */
+.mapa-container{
+  border:6px solid #fff;
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow:0 20px 40px rgba(0,0,0,0.4);
+}
+
+.mapa-container iframe{
+  width:100%;
+  height:350px;
+}
+
+/* ================= RODAPÉ ================= */
+.rodape-principal{
+  background:#000;
+  padding:100px 8%;
+  display:flex;
+  justify-content:space-between;
+  gap:80px;
+}
+
+.contatos-footer{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.item-contato{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  font-size:1.1rem;
+}
+
+.item-contato img{
+  width:28px;
+}
+
+.horarios{
+  margin-top:20px;
+  line-height:1.7;
+  font-size:0.95rem;
+  opacity:0.8;
+}
+
+/* ================= COMENTÁRIOS ================= */
+#reviews-container{
+  display:flex;
+  gap:30px;
+  flex-wrap:wrap;
+}
+
+.card-comentario{
+  background:#fff;
+  color:#000;
+  padding:30px;
+  border-radius:20px;
+  width:300px;
+  box-shadow:0 15px 35px rgba(0,0,0,0.4);
+  transition:0.4s;
+}
+
+.card-comentario:hover{
+  transform:translateY(-8px);
+}
+
+.stars{
+  color:#fbbc04;
+  margin-bottom:15px;
+}
+
+/* ================= RESPONSIVO ================= */
+@media(max-width:1000px){
+
+  .secao-contato{
+    flex-direction:column;
+    align-items:center;
+  }
+
+  .rodape-principal{
+    flex-direction:column;
+  }
+
+  .carousel-track img{
+    width:260px;
+    height:420px;
+  }
+
+}
+
+/* ===== BLOCO GERAL ===== */
+
+.rating-geral{
+  text-align:center;
+  margin-bottom:60px;
+}
+
+.nota{
+  font-size:3rem;
+  font-weight:bold;
+}
+
+.estrelas{
+  color:#fbbc04;
+  font-size:1.5rem;
+  margin:10px 0;
+}
+
+.btn-google{
+  display:inline-block;
+  margin-top:15px;
+  padding:10px 25px;
+  background:#14f014;
+  color:#000;
+  text-decoration:none;
+  font-weight:bold;
+  border-radius:30px;
+  transition:0.3s;
+}
+
+.btn-google:hover{
+  background:#fff;
+}
+
+/* ===== CARDS ===== */
+
+.reviews-slider{
+  display:flex;
+  gap:30px;
+  overflow:hidden;
+}
+
+.review-card{
+  background:#fff;
+  color:#000;
+  padding:30px;
+  border-radius:20px;
+  min-width:300px;
+  box-shadow:0 15px 35px rgba(0,0,0,0.4);
+  transition:0.4s;
+}
+
+.review-card:hover{
+  transform:translateY(-8px);
+}
+
+.review-card .stars{
+  color:#fbbc04;
+  margin-bottom:15px;
+}
+
+/* ===== BLOCO PRINCIPAL ===== */
+
+.comentarios-alternativos{
+  padding:120px 8%;
+  background:#000;
+  border-top:2px solid #14f014;
+}
+
+.topo-reviews{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:80px;
+  flex-wrap:wrap;
+  gap:30px;
+}
+
+.nota-bloco{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.nota{
+  font-size:4rem;
+  font-family:'Sprite Graffiti Shadow';
+  color:#14f014;
+}
+
+.estrelas{
+  color:#fbbc04;
+  letter-spacing:3px;
+}
+
+.nota-bloco p{
+  font-size:0.9rem;
+  opacity:0.7;
+}
+
+/* ===== BOTÃO ===== */
+
+.btn-google-alt{
+  padding:15px 35px;
+  border:2px solid #14f014;
+  color:#14f014;
+  text-decoration:none;
+  font-weight:bold;
+  letter-spacing:2px;
+  transition:0.3s;
+}
+
+.btn-google-alt:hover{
+  background:#14f014;
+  color:#000;
+}
+
+/* ===== GRID ===== */
+
+.reviews-grid{
+  display:flex;
+  flex-wrap:wrap;
+  gap:60px;
+  justify-content:center;
+}
+
+/* ===== CARD BASE ===== */
+
+.review-alt{
+  width:300px;
+  padding:40px;
+  border:1px solid #14f01433;
+  background:#0a0a0a;
+  position:relative;
+  transition:0.4s;
+  box-shadow:0 20px 40px rgba(0,0,0,0.6);
+}
+
+/* ===== ROTAÇÕES DIFERENTES ===== */
+
+.review-alt:nth-child(1){
+  transform:rotate(-2deg);
+}
+
+.review-alt:nth-child(2){
+  transform:rotate(2.5deg);
+}
+
+.review-alt:nth-child(3){
+  transform:rotate(-1deg);
+}
+
+/* ===== HOVER CORRIGE E LEVANTA ===== */
+
+.review-alt:hover{
+  transform:rotate(0deg) translateY(-15px) scale(1.03);
+  border-color:#14f014;
+}
+
+/* ===== TEXTO ===== */
+
+.review-alt p{
+  font-size:1rem;
+  line-height:1.7;
+  margin:20px 0;
+}
+
+.review-alt span{
+  font-size:0.8rem;
+  opacity:0.6;
+}
+
+.review-alt::before{
+  content:"";
+  position:absolute;
+  top:-15px;
+  left:40%;
+  width:80px;
+  height:20px;
+  background:#14f01433;
+  transform:rotate(-10deg);
+}
+
+
+.btn-agendar-fixo{
+  position:fixed;
+  bottom:30px;
+  right:30px;
+  background:#14f014;
+  color:#000;
+  border:none;
+  padding:18px 28px;
+  font-weight:bold;
+  letter-spacing:2px;
+  cursor:pointer;
+  z-index:999;
+  box-shadow:0 0 20px #14f014;
+  transition:0.3s;
+}
+
+.btn-agendar-fixo:hover{
+  transform:scale(1.1);
+}
+
+
+
+.modal-agendamento{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.95);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:1000;
+}
+
+.modal-conteudo{
+  position:relative;
+  background:#0a0a0a;
+  padding:60px;
+  width:90%;
+  max-width:500px;
+  border:2px solid #14f014;
+  box-shadow:0 0 30px #14f01433;
+}
+
+.fechar-modal{
+  position:absolute;
+  top:20px;
+  right:20px;
+  background:none;
+  border:none;
+  color:#14f014;
+  font-size:1.5rem;
+  cursor:pointer;
+}
+
+.etapa{
+  display:none;
+  flex-direction:column;
+  gap:20px;
+}
+
+.etapa h2{
+  font-family:'Sprite Graffiti Shadow';
+  color:#14f014;
+}
+
+.etapa button{
+  padding:15px;
+  background:none;
+  border:1px solid #14f014;
+  color:#14f014;
+  cursor:pointer;
+}
+
+.etapa button:hover{
+  background:#14f014;
+  color:#000;
+}
+
+input{
+  padding:15px;
+  background:#000;
+  border:1px solid #14f014;
+  color:#14f014;
+}
+
+.voltar{
+  align-self:flex-start;
+  font-size:0.8rem;
+}
+
+
+
+.calendario{
+  margin-top:20px;
+}
+
+.header-calendario{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.header-calendario h3{
+  font-family:'Sprite Graffiti Shadow';
+  color:#14f014;
+  text-transform:capitalize;
+}
+
+.header-calendario button{
+  background:none;
+  border:1px solid #14f014;
+  color:#14f014;
+  padding:5px 12px;
+  cursor:pointer;
+}
+
+.grid-dias{
+  display:grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap:10px;
+}
+
+.dia{
+  padding:15px;
+  border:1px solid #14f01433;
+  cursor:pointer;
+  text-align:center;
+}
+
+.dia:hover{
+  background:#14f014;
+  color:#000;
+}
+
+.dia.passado{
+  opacity:0.2;
+  pointer-events:none;
+}
+
+.dia.selecionado{
+  background:#14f014;
+  color:#000;
 }
